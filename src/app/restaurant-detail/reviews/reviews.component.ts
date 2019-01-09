@@ -16,7 +16,7 @@ export class ReviewsComponent implements OnInit {
     private router: ActivatedRoute) { }
 
   ngOnInit() {
-    //Ao invés de utilizar .subecribe(), usei pipe async no *ngFor no templete
+    //Ao invés de utilizar .subcribe(), usei pipe async no *ngFor do templete
    this.reviews = this.restaurantService.reviewOfRestaurant(this.router.parent.snapshot.params['id'])
   }
 }
