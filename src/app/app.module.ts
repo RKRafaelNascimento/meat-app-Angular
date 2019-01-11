@@ -22,6 +22,8 @@ import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-
 import { OrderComponent } from './order/order.component';
 import { InputComponent } from './shared/input/input.component';
 import { RadioOptionsComponent } from './shared/radio-options/radio-options.component';
+import { OrderItemsComponent } from './order/order-items/order-items.component';
+import { OrderService } from './order/order.service';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { RadioOptionsComponent } from './shared/radio-options/radio-options.comp
     ReviewsComponent,
     OrderComponent,
     InputComponent,
-    RadioOptionsComponent
+    RadioOptionsComponent,
+    OrderItemsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { RadioOptionsComponent } from './shared/radio-options/radio-options.comp
     FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantsService, ShoppingCartService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [RestaurantsService, ShoppingCartService, OrderService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
