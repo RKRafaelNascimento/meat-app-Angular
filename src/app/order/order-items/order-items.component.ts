@@ -9,8 +9,8 @@ import { ShoppCart } from 'app/restaurant-detail/shopping-cart/shopping-cart.mod
 export class OrderItemsComponent implements OnInit {
 
 @Input() items: ShoppCart[] = []
-@Output() incrementQty = new EventEmitter<ShoppCart>()
-@Output() descreaseQty = new EventEmitter<ShoppCart>()
+@Output() increaseQty = new EventEmitter<ShoppCart>()
+@Output() decreaseQty = new EventEmitter<ShoppCart>()
 @Output() remove = new EventEmitter<ShoppCart>()
 
   constructor() { }
@@ -18,12 +18,12 @@ export class OrderItemsComponent implements OnInit {
   ngOnInit() {
   }
 
-  emitIncrement(item: ShoppCart){
-    this.incrementQty.emit(item)
+  emitIncrementQty(item: ShoppCart){
+    this.increaseQty.emit(item)
   }
 
-  emitDescrease(item: ShoppCart){
-    this.descreaseQty.emit(item)
+  emitDecreaseQty(item: ShoppCart){
+    this.decreaseQty.emit(item)
   }
 
   emitRemove(item: ShoppCart){

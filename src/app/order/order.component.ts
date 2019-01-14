@@ -36,6 +36,4 @@ export class OrderComponent implements OnInit {
   remove(item: ShoppCart){
     this.orderService.remove(item)
   }
-
-
 }

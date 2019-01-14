@@ -16,7 +16,6 @@ export class ShoppingCartService {
     }else {
       this.item.push(new ShoppCart(item))
     }
-
   }
 
   increaseQty(item: ShoppCart){
@@ -37,6 +36,5 @@ export class ShoppingCartService {
   total(): number{
     return this.item.map(items => items.value()).reduce((prev,value) => prev + value, 0)
   }
-
 
 }
