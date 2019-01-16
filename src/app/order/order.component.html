@@ -49,7 +49,7 @@
               </div>
                 <!-- order items -->
                 <mt-order-items [items]="itemsCart()"
-                  (increaseQtyy)="increaseQty($event)"
+                  (increaseQty)="increaseQty($event)"
                    (decreaseQty)="decreaseQty($event)"
                    (remove)="remove($event)"></mt-order-items>
               <!-- /.col -->
@@ -62,30 +62,16 @@
                 <p class="lead">Formas de Pagamento:</p>
 
                   <div class="form-group">
-                    <mt-radio-options [options]="paymentsOptions" name="paymentsOptions" ngModel ></mt-radio-options>
+                    <mt-radio-options [options]="paymentsOptions" name="paymentsOptions" ngModel required ></mt-radio-options>
                   </div>
 
               </div>
               <!-- /.col -->
               <div class="col-sm-6 col-xs-12">
                 <p class="lead">Frete e Total:</p>
-
-                <div class="table-responsive">
-                  <table class="table">
-                    <tbody><tr>
-                      <th style="width:50%">Itens:</th>
-                      <td class="text-right">R$ 20,00</td>
-                    </tr>
-                    <tr>
-                      <th>Frete:</th>
-                      <td class="text-right">R$ 8,00</td>
-                    </tr>
-                    <tr>
-                      <th>Total:</th>
-                      <td class="text-right">R$ 28,00</td>
-                    </tr>
-                  </tbody></table>
-                </div>
+                <!-- Delivery-->
+                <mt-delivery-costs [deliveryValue]="valueTotal()"
+                                   [deliveryFrete]="valueFrete" ></mt-delivery-costs>
               </div>
               <!-- /.col -->
             </div>
@@ -94,7 +80,7 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <button [disabled]="!form.valid" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
+              <button [disabled]="!form.valid || itemsCart().length === 0" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
               </button>
             </div>
           </div>

@@ -10,6 +10,8 @@ import { ShoppCart } from 'app/restaurant-detail/shopping-cart/shopping-cart.mod
 })
 export class OrderComponent implements OnInit {
 
+  valueFrete: number = 8
+
   paymentsOptions: RadioOptions[] = [
     {label: 'Dinheiro', value: 'DIM'},
     {label: 'Cartão Debito', value: "DEB"},
@@ -19,6 +21,10 @@ export class OrderComponent implements OnInit {
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+  }
+
+  valueTotal(): number {
+    return this.orderService.valueTotal()
   }
 
   itemsCart(): ShoppCart[]{
