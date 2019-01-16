@@ -3,6 +3,7 @@ import { RadioOptions } from 'app/shared/radio-options/radio-options.model';
 import { OrderService } from './order.service';
 import { ShoppCart } from 'app/restaurant-detail/shopping-cart/shopping-cart.model';
 import { Order, OrderItems } from './order.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mt-order',
@@ -19,7 +20,7 @@ export class OrderComponent implements OnInit {
     {label: 'Boleto', value: "BOL"}
   ]
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -50,8 +51,15 @@ export class OrderComponent implements OnInit {
 
   orderCheck(order: Order){
     order.itemsOrder = this.itemsCart()
-    .map((item: ShoppCart ) => new OrderItems(item.quantity, item.menuItem.id) )
-    this.orderService.orderCheck(order).subscribe((orderId:string) => console.log(`Compra efetuada com Sucesso ${orderId}`))
+           .map((item: ShoppCart ) =>
+            new OrderItems(item.quantity, item.menuItem.id) )
+
+    this.orderService.orderCheck(order)
+          .subscribe((orderId:string) =>
+           console.log(`Compra efetuada com Sucesso ${orderId}`))
+           this.router.navigate(['/order-summry'])
+
+    console.log(order)
     this.clear()
   }
 
