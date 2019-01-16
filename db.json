@@ -370,5 +370,43 @@
       "restaurantId": "tasty-treats"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "adress": "Rua Bela Cintra ",
+      "number": "123",
+      "optional": "2 Andar",
+      "paymentsOptions": "DIM",
+      "itemsOrder": [
+        {
+          "quantity": 4,
+          "menuItemId": "cup-cake"
+        },
+        {
+          "quantity": 4,
+          "menuItemId": "bread"
+        },
+        {
+          "quantity": 1,
+          "menuItemId": "donut"
+        },
+        {
+          "quantity": 4,
+          "menuItemId": "icestd.png"
+        },
+        {
+          "quantity": 2,
+          "menuItemId": "chocpop"
+        },
+        {
+          "quantity": 3,
+          "menuItemId": "greensandwich"
+        },
+        {
+          "quantity": 4,
+          "menuItemId": "ceasar"
+        }
+      ],
+      "id": 1
+    }
+  ]
 }

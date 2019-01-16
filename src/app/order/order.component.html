@@ -80,7 +80,7 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <button [disabled]="!form.valid || itemsCart().length === 0" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
+              <button (click)='orderCheck(form.value)' [disabled]="!form.valid || itemsCart().length === 0" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
               </button>
             </div>
           </div>
