@@ -4,6 +4,7 @@ import { OrderService } from './order.service';
 import { ShoppCart } from 'app/restaurant-detail/shopping-cart/shopping-cart.model';
 import { Order, OrderItems } from './order.model';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class OrderComponent implements OnInit {
 
   valueFrete: number = 8
+  orderForm: FormGroup
 
   paymentsOptions: RadioOptions[] = [
     {label: 'Dinheiro', value: 'DIM'},
@@ -20,9 +22,19 @@ export class OrderComponent implements OnInit {
     {label: 'Boleto', value: "BOL"}
   ]
 
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.orderForm = this.formBuilder.group({
+      name: this.formBuilder.control(''),
+      email: this.formBuilder.control(''),
+      emailConfirmation: this.formBuilder.control(''),
+      address: this.formBuilder.control(''),
+      number: this.formBuilder.control(''),
+      optional: this.formBuilder.control(''),
+      paymentsOptions: this.formBuilder.control('')
+    })
   }
 
   valueTotal(): number {

@@ -8,7 +8,7 @@
       {{form.valid}}
       {{form.value | json}}
 
-          <form #form="ngForm" novalidate>
+          <form [formGroup]="orderForm" novalidate>
             <div class="row">
               <div class="col-xs-12">
                 <h2 class="page-header">
@@ -16,25 +16,48 @@
                 </h2>
               </div>
             </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <p class="lead">Seus Dados:</p>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <mt-input-container errorMessage="Campo Obrigatório" label="Nome">
+                    <input type="text" class="form-control" formControlName="name" placeholder="Nome" autocomplete="off">
+                </mt-input-container>
+              </div>
 
-            <div class="row invoice-info">
+              <div class="col-sm-3 col-xs-6">
+                <mt-input-container errorMessage="E-mail Inválido" label="E-mail">
+                  <input type="text" class="form-control" formControlName="number"  placeholder="E-mail" autocomplete="off">
+                </mt-input-container>
+              </div>
+
+              <div class="col-sm-3 col-xs-6">
+                <mt-input-container errorMessage="Campo Obrigatório e somente numeros" label="E-mail">
+                  <input type="text" class="form-control" formControlName="emailConfirmation"  placeholder="Confirmação de email" autocomplete="off">
+                </mt-input-container>
+              </div>
+
+            </div>
+
+            <div class="row ">
               <div class="col-xs-12">
                 <p class="lead">Endereço de Entrega:</p>
               </div>
               <div class="col-sm-6 col-xs-12">
                 <mt-input-container errorMessage="Campo Obrigatório" label="Endereco">
-                    <input type="text" class="form-control" name="adress" required minlength="5" ngModel placeholder="Endereço" autocomplete="off">
+                    <input type="text" class="form-control" formControlName="address" placeholder="Endereço" autocomplete="off">
                 </mt-input-container>
               </div>
               <div class="col-sm-3 col-xs-6">
                 <mt-input-container errorMessage="Campo Obrigatório e somente numeros" label="Numero">
-                  <input type="text" class="form-control" name="number" pattern="^[0-9]*$" required ngModel placeholder="Número" autocomplete="off">
+                  <input type="text" class="form-control" formControlName="number" placeholder="Número" autocomplete="off">
                 </mt-input-container>
               </div>
               <div class="col-sm-3 col-xs-6">
                 <div class="form-group">
                   <label class="control-label sr-only" for="inputSuccess"><i class="fa fa-check"></i> Complemento</label>
-                  <input type="text" class="form-control" name="optional" ngModel placeholder="Complemento">
+                  <input type="text" class="form-control" formControlName="optional"  placeholder="Complemento">
                 </div>
 
               </div>
@@ -62,7 +85,7 @@
                 <p class="lead">Formas de Pagamento:</p>
 
                   <div class="form-group">
-                    <mt-radio-options [options]="paymentsOptions" name="paymentsOptions" ngModel required ></mt-radio-options>
+                    <mt-radio-options [options]="paymentsOptions" formControlName="paymentsOptions"  ></mt-radio-options>
                   </div>
 
               </div>
@@ -80,7 +103,7 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <button (click)='orderCheck(form.value)' [disabled]="!form.valid || itemsCart().length === 0" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
+              <button (click)='orderCheck(orderForm.value)' [disabled]="!orderForm.valid || itemsCart().length === 0" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
               </button>
             </div>
           </div>
