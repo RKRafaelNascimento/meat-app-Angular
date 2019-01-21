@@ -5,8 +5,8 @@
   <section class="content">
     <section class="invoice">
 
-      {{form.valid}}
-      {{form.value | json}}
+
+
 
           <form [formGroup]="orderForm" novalidate>
             <div class="row">
@@ -28,7 +28,7 @@
 
               <div class="col-sm-3 col-xs-6">
                 <mt-input-container errorMessage="E-mail Inválido" label="E-mail">
-                  <input type="text" class="form-control" formControlName="number"  placeholder="E-mail" autocomplete="off">
+                  <input type="text" class="form-control" formControlName="email"  placeholder="E-mail" autocomplete="off">
                 </mt-input-container>
               </div>
 
@@ -85,7 +85,7 @@
                 <p class="lead">Formas de Pagamento:</p>
 
                   <div class="form-group">
-                    <mt-radio-options [options]="paymentsOptions" formControlName="paymentsOptions"  ></mt-radio-options>
+                    <mt-radio-options [options]="paymentsOptions" formControlName="paymentsOption"  ></mt-radio-options>
                   </div>
 
               </div>
@@ -103,7 +103,7 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <button (click)='orderCheck(orderForm.value)' [disabled]="!orderForm.valid || itemsCart().length === 0" href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
+              <button (click)='orderCheck(orderForm.value)' [disabled]="!orderForm.valid || itemsCart().length === 0"  href="order-summary.html" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir Pedido
               </button>
             </div>
           </div>
