@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { ShoppCart } from 'app/restaurant-detail/shopping-cart/shopping-cart.model';
 import { Order, OrderItems } from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'mt-order',
@@ -15,6 +15,9 @@ export class OrderComponent implements OnInit {
 
   valueFrete: number = 8
   orderForm: FormGroup
+
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  numberPattern = /^[0-9]*$/
 
   paymentsOptions: RadioOptions[] = [
     {label: 'Dinheiro', value: 'DIM'},
@@ -27,14 +30,26 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.orderForm = this.formBuilder.group({
-      name: this.formBuilder.control(''),
-      email: this.formBuilder.control(''),
-      emailConfirmation: this.formBuilder.control(''),
-      address: this.formBuilder.control(''),
-      number: this.formBuilder.control(''),
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      email: this.formBuilder.control('', [Validators.required,Validators.pattern(this.emailPattern)]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required,Validators.pattern(this.emailPattern)]),
+      address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      number: this.formBuilder.control('',[Validators.required,Validators.pattern(this.numberPattern)]),
       optional: this.formBuilder.control(''),
-      paymentsOption: this.formBuilder.control('')
-    })
+      paymentsOption: this.formBuilder.control('',[Validators.required])
+    }, {Validator: OrderComponent.equalsTo} )
+  }
+
+  static equalsTo(group: AbstractControl): {[key:string]: boolean} {
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+    if(!email || !emailConfirmation){
+      return undefined
+    }
+    if(email.value !== emailConfirmation.value){
+      return {emailsNotMatch:true}
+    }
+    return undefined
   }
 
   valueTotal(): number {
